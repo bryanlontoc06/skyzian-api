@@ -13,6 +13,7 @@ const app = express();
 
 // import routes
 const userRoutes =  require('./routes/user')
+const patientRoutes =  require('./routes/patient')
 
 
 // app middleware
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // import the middleware
 app.use('/api', userRoutes);
+app.use('/api/patient', patientRoutes);
 
 
 

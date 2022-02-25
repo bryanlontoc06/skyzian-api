@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-// import controllers
-const { read } = require('../controllers/patient');
 
-
-router.get('/', read)
+router.get('/', (req, res) => {
+    res.send('Patient route');
+})
 
 
 
