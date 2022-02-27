@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 // import controllers
-const { read } = require('../controllers/patient');
+// const { read } = require('../controllers/patient');
 
 
-router.get('/', read)
+// router.get('/', read)
 
 
 

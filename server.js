@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // import the middleware
 app.use('/api', userRoutes);
-app.use('/api/patient', patientRoutes);
+app.use('/api', patientRoutes);
 
 
 

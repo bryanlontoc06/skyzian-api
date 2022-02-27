@@ -2,9 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
-    res.send('Patient route');
-})
+
+// import controllers
+const { read, addNewPatient } = require('../controllers/patient');
+
+
+
+router.get('/patients', read)
+router.post('/patient/new', addNewPatient)
 
 
 

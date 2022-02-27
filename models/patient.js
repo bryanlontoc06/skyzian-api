@@ -8,14 +8,7 @@ const patientSchema = new mongoose.Schema({
         trim: true,
         maxlength: 32
     },
-    email: {
-        type: String,
-        required: true,
-        trim: true,
-        unique: true,
-        lowercase: true
-    },
-    contact_number: {
+    contact_no: {
         type: String,
         trim: true
     },
@@ -26,9 +19,26 @@ const patientSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        trim: true,
-        required: true
-    }
+        trim: true
+    },
+    email : {
+        type : String,
+        trim : true,
+        lowercase : true
+    },
+    facebook_id : {
+        type : String,
+        trim : true
+    },
+    date_of_birth : {
+        type : Date,
+        required : true,
+        trim : true
+    },
+    performed_tests: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Test'
+    }],
 }, {timestamps: true});
 
 
