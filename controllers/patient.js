@@ -1,13 +1,23 @@
 const Patient = require('../models/patient');
 
-exports.read = (req, res) => {
-    const patientId = req.params.patientId;
+exports.getPatients = async (req, res) => {
+    try {
+        const patients = await Patient.find();
+        res.json(patients);
+    } catch (err) {
+        console.log(`Error getting patients`, err);
+        res.status(500).json({
+            error: err
+        });
+    }
 };
+
 
 exports.addNewPatient = (req, res) => {
 
     const newPatient = new Patient({
-        name: req.body.name,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
         contact_no: req.body.contact_no,
         age: req.body.age,
         address: req.body.address,
@@ -19,18 +29,19 @@ exports.addNewPatient = (req, res) => {
 
     console.log(newPatient);
 
-    // newPatient.save((err, patient) => {
-    //     if (err) {
-    //         res.json({
-    //             success: false,
-    //             msg: 'Failed to add new patient'
-    //         });
-    //     } else {
-    //         res.json({
-    //             success: true,
-    //             msg: 'Patient added successfully'
-    //         });
-    //     }
-    // });
-    
+    newPatient.save((err, patient) => {
+        if (err) {
+            console.log(`Error in saving patient: ${err}`);
+            return res.status(401).json({
+                success: false,
+                msg: 'Failed to add new patient'
+            });
+        } else {
+            console.log(`Patient added successfully: ${patient}`);
+            res.json({
+                success: true,
+                msg: 'Patient added successfully'
+            });
+        }
+    });
 };

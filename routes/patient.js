@@ -4,11 +4,11 @@ const router = express.Router();
 
 
 // import controllers
-const { read, addNewPatient } = require('../controllers/patient');
+const { getPatients, addNewPatient } = require('../controllers/patient');
 
 
 
-router.get('/patients', read)
+router.get('/patients', getPatients)
 router.post('/patient/new', addNewPatient)
 
 

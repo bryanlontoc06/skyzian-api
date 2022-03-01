@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 // import controllers
-// const { read } = require('../controllers/patient');
+const { signup } = require('../controllers/auth');
 
 
-// router.get('/', read)
+router.post('/user/signup', signup)
 
 
 

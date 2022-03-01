@@ -9,6 +9,14 @@ require('dotenv').config();
 const app = express();
 
 
+// connect to database
+mongoose.connect(process.env.DB_CONNECTION, { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true 
+})
+.then(() => console.log('Connected to database'))
+.catch(err => console.log(`DB Connection Error`, err));
+
 
 
 // import routes

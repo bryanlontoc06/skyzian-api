@@ -2,7 +2,13 @@ const mongoose = require('mongoose');
 
 
 const patientSchema = new mongoose.Schema({
-    name: {
+    firstname: {
+        type: String,
+        required: true,
+        trim: true,
+        maxlength: 32
+    },
+    lastname: {
         type: String,
         required: true,
         trim: true,
