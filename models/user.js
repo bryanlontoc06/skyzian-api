@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
         required : true
     },
     salt : String,
+    active: {
+        type: Boolean,
+        default: true
+    },
     role : {
         type : String,
         default : 'staff'

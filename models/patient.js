@@ -6,13 +6,15 @@ const patientSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        maxlength: 32
+        maxlength: 32,
+        lowercase: true
     },
     lastname: {
         type: String,
         required: true,
         trim: true,
-        maxlength: 32
+        maxlength: 32,
+        lowercase: true
     },
     contact_no: {
         type: String,
@@ -43,7 +45,11 @@ const patientSchema = new mongoose.Schema({
     },
     performed_tests: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Test'
+        ref: 'Test',
+        date: {
+            type: Date,
+            default: Date.now
+        }
     }],
 }, {timestamps: true});
 
