@@ -7,14 +7,14 @@ const patientSchema = new mongoose.Schema({
         required: true,
         trim: true,
         maxlength: 32,
-        lowercase: true
+        // lowercase: true
     },
     lastname: {
         type: String,
         required: true,
         trim: true,
         maxlength: 32,
-        lowercase: true
+        // lowercase: true
     },
     contact_no: {
         type: String,
@@ -44,8 +44,25 @@ const patientSchema = new mongoose.Schema({
         trim : true
     },
     performed_lab_tests: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'LabTest',
+        name: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 32,
+            lowercase: true
+        },
+        description: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 32,
+            lowercase: true
+        },
+        price: {
+            type: Number,
+            trim: true,
+            minlength: 4
+        },
         date: {
             type: Date,
             default: Date.now

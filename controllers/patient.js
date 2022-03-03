@@ -18,21 +18,28 @@ exports.getPatients = async (req, res) => {
 exports.addNewPatient = (req, res) => {
     const {firstname, lastname, contact_no, age, address, email, facebook_id, date_of_birth, performed_tests} = req.body;
     
+    const lowercaseFirstname = firstname.toLowerCase();
+    const lowercaseLastname = lastname.toLowerCase();
+    const lowercaseAddress = address.toLowerCase();
+
     const newPatient = new Patient({
-        firstname,
-        lastname,
+        firstname: lowercaseFirstname.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()),
+        lastname: lowercaseLastname.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()),
         contact_no,
         age: getAge(date_of_birth),
-        address,
+        address: lowercaseAddress.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()),
         email,
         facebook_id,
         date_of_birth,
         performed_tests
     });
-
-    // console.log(newPatient);
-
-    Patient.find({$and: [{firstname}, {lastname}, {date_of_birth}]}).exec((err, user) => {
+    
+    
+    Patient.find({$and: [
+        {firstname: lowercaseFirstname.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())},
+        {lastname: lowercaseLastname.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())},
+        {date_of_birth}
+    ]}).exec((err, user) => {
         console.log(user);
         if (user.length !== 0) {
             return res.status(400).json({
