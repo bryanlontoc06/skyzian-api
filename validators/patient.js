@@ -1,7 +1,7 @@
 const { body } = require('express-validator');
 
 
-exports.newPatientValidator = [
+exports.patientValidator = [
     body('firstname')
         .not()
         .isEmpty()

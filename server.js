@@ -23,6 +23,7 @@ mongoose.connect(process.env.DB_CONNECTION, {
 const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/user')
 const patientRoutes = require('./routes/patient')
+const labTestRoutes = require('./routes/labTest')
 
 
 // app middleware
@@ -39,6 +40,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api', userRoutes);
 app.use('/api', authRoutes);
 app.use('/api', patientRoutes);
+app.use('/api', labTestRoutes);
 
 
 

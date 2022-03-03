@@ -43,9 +43,9 @@ const patientSchema = new mongoose.Schema({
         required : true,
         trim : true
     },
-    performed_tests: [{
+    performed_lab_tests: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Test',
+        ref: 'LabTest',
         date: {
             type: Date,
             default: Date.now

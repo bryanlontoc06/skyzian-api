@@ -7,16 +7,16 @@ const router = express.Router();
 const { getPatients, addNewPatient, getPatientById, deletePatientById, updatePatientById } = require('../controllers/patient');
 
 // import validators from 'validator';
-const { newPatientValidator } = require('../validators/patient');
+const { patientValidator } = require('../validators/patient');
 const { runValidation } = require('../validators');
 
 
 
 router.get('/patients', getPatients)
-router.post('/patient/new', newPatientValidator, runValidation, addNewPatient)
+router.post('/patient/new', patientValidator, runValidation, addNewPatient)
 router.get('/patient/:patientID', getPatientById)
 router.delete('/patient/:patientID', deletePatientById)
-router.put('/patient/:patientID', newPatientValidator, runValidation, updatePatientById)
+router.put('/patient/:patientID', patientValidator, runValidation, updatePatientById)
 
 
 
