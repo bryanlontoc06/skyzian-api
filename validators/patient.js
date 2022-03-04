@@ -13,5 +13,5 @@ exports.patientValidator = [
     body('date_of_birth')
         .not()
         .isEmpty()
-        .withMessage('Date of birth is required'),
+        .withMessage('Date of birth is required')
 ];

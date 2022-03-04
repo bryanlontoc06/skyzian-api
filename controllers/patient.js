@@ -1,5 +1,6 @@
 const Patient = require('../models/patient');
-const {getAge} = require('../helpers/ageCalc');
+const {getAge} = require('../helpers/number_helpers');
+const {capitalize} = require('../helpers/letter_helpers');
 
 
 exports.getPatients = async (req, res) => {
@@ -16,28 +17,28 @@ exports.getPatients = async (req, res) => {
 
 
 exports.addNewPatient = (req, res) => {
-    const {firstname, lastname, contact_no, age, address, email, facebook_id, date_of_birth, performed_tests} = req.body;
+    const {firstname, lastname, contact_no, address, email, facebook_id, date_of_birth, performed_lab_tests} = req.body;
     
     const lowercaseFirstname = firstname.toLowerCase();
     const lowercaseLastname = lastname.toLowerCase();
     const lowercaseAddress = address.toLowerCase();
 
     const newPatient = new Patient({
-        firstname: lowercaseFirstname.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()),
-        lastname: lowercaseLastname.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()),
+        firstname: capitalize(lowercaseFirstname),
+        lastname: capitalize(lowercaseLastname),
         contact_no,
         age: getAge(date_of_birth),
-        address: lowercaseAddress.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()),
+        address: capitalize(lowercaseAddress),
         email,
         facebook_id,
         date_of_birth,
-        performed_tests
+        performed_lab_tests
     });
     
     
     Patient.find({$and: [
-        {firstname: lowercaseFirstname.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())},
-        {lastname: lowercaseLastname.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())},
+        {firstname: capitalize(lowercaseFirstname)},
+        {lastname: capitalize(lowercaseLastname)},
         {date_of_birth}
     ]}).exec((err, user) => {
         console.log(user);
@@ -109,7 +110,7 @@ exports.deletePatientById = async (req, res) => {
 }
 
 exports.updatePatientById = (req, res) => {
-    const {firstname, lastname, contact_no, age, address, email, facebook_id, date_of_birth, performed_tests} = req.body;
+    const {firstname, lastname, contact_no, age, address, email, facebook_id, date_of_birth, performed_lab_tests} = req.body;
     Patient.findById(req.params.patientID).exec((err, patient) => {
         if (err || !patient) {
             console.log(`Error in finding patient by id: ${err}`);
@@ -132,7 +133,7 @@ exports.updatePatientById = (req, res) => {
             patient.email = email;
             patient.facebook_id = facebook_id;
             patient.date_of_birth = date_of_birth;
-            patient.performed_tests = performed_tests;
+            patient.performed_lab_tests = performed_lab_tests;
         }
 
         patient.save((err, updatedPatient) => {

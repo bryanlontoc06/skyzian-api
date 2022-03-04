@@ -1,6 +1,36 @@
 const mongoose = require('mongoose');
 
 
+const performed_lab_test = new mongoose.Schema({
+    lab_test_name: {
+        type: String,
+        required: true,
+        trim: true,
+        maxlength: 32,
+        lowercase: true
+    },
+    lab_test_description: {
+        type: String,
+        maxlength: 500,
+    },
+    lab_test_result: {
+        type: String,
+    },
+    lab_test_date: {
+        type: Date,
+    },
+    lab_test_comment: {
+        type: String,
+        trim: true,
+        maxlength: 500,
+    },
+    lab_test_price: {
+        type: Number,
+        trim: true,
+        maxlength: 4
+    }
+});
+
 const patientSchema = new mongoose.Schema({
     firstname: {
         type: String,
@@ -43,31 +73,7 @@ const patientSchema = new mongoose.Schema({
         required : true,
         trim : true
     },
-    performed_lab_tests: [{
-        name: {
-            type: String,
-            required: true,
-            trim: true,
-            maxlength: 32,
-            lowercase: true
-        },
-        description: {
-            type: String,
-            required: true,
-            trim: true,
-            maxlength: 32,
-            lowercase: true
-        },
-        price: {
-            type: Number,
-            trim: true,
-            minlength: 4
-        },
-        date: {
-            type: Date,
-            default: Date.now
-        }
-    }],
+    performed_lab_tests: [performed_lab_test],
 }, {timestamps: true});
 
 
