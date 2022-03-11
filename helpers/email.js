@@ -1,7 +1,7 @@
 // /helpers/email.js
 const nodeMailer = require("nodemailer");
  
-exports.sendEmailWithNodemailer = (req, res, emailData) => {
+exports.sendEmailWithNodemailer = (req, res, emailData, message) => {
   const transporter = nodeMailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -21,7 +21,7 @@ exports.sendEmailWithNodemailer = (req, res, emailData) => {
     .then((info) => {
       console.log(`Message sent: ${info.response}`);
       return res.json({
-        message: `Email has been sent to ${emailData.to}. Follow the instruction.`,
+        message: `Email has been sent to ${emailData.to}. Follow the instruction ${message}.`,
       });
     })
     .catch((err) => {return res.json({message: err.message})});

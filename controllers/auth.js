@@ -70,7 +70,7 @@ exports.signup = (req, res) => {
             `,
     };
  
-    sendEmailWithNodemailer(req, res, emailData);
+    sendEmailWithNodemailer(req, res, emailData, message='to activate your account.');
  
     // const emailData = {
     //   from: process.env.EMAIL_FROM,
@@ -127,7 +127,7 @@ exports.accountActivation = (req, res) => {
             })
           }
           return res.json({
-            message: 'Signup success! Please signin.'
+            message: 'Activation success! Please signin.'
           })
         });
       });
